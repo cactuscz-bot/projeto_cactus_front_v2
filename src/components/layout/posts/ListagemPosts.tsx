@@ -4,7 +4,6 @@ import ButtonCustom from "../../ui/button/Button";
 import Post from "./Post";
 import Posts from "@/src/data/posts.json";
 import EmptyCustom from "../../ui/empty/Empty";
-import { BlogPost } from "@/src/types/post.types";
 
 interface ListagemPostsProps {
   onClickPostEvent?: (id: string) => void;
@@ -20,9 +19,8 @@ export default function ListagemPosts({ onClickPostEvent }: ListagemPostsProps) 
       Posts.map((p) => ({
         id: p.id,
         title: p.title,
-        image: p.image,
-        category: p.category,
-        date: p.date,
+        image_url: p.image_url,
+        created_at: p.created_at,
       })),
     [],
   );

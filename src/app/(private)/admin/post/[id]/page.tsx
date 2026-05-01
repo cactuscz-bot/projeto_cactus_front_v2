@@ -20,7 +20,7 @@ export default async function DetalhesPostAdmin({ params }: DetalhesPostAdminPro
   }
 
   return (
-    <main className="container-menor flex flex-col gap-6 pt-10 pb-20">
+    <main className="container-menor flex flex-col gap-8 pt-10 pb-20">
       <div className="flex justify-between">
         <BackButton />
 

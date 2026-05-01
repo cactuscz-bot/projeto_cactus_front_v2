@@ -4,20 +4,19 @@ import Editor from "@/src/components/layout/editor/Editor";
 import ButtonCustom from "@/src/components/ui/button/Button";
 import InputCustom from "@/src/components/ui/input/Input";
 import InputImageCustom from "@/src/components/ui/input/InputImage";
-import { BlogPost } from "@/src/types/post.types";
+import { BlogPost, BlogPostCreate, BlogPostEdit } from "@/src/types/post.types";
 import { Edit, Plus } from "lucide-react";
 import { useState } from "react";
 
 interface FormPostProps {
-  initialData?: Omit<BlogPost, "id" | "date">;
+  initialData?: BlogPost;
   mode?: "edit" | "create";
 }
 
 export default function FormPost({ initialData, mode = "create" }: FormPostProps) {
-  const [description, setDescription] = useState(initialData?.description || "");
-  const [, setImage] = useState<File | null>(null);
+  const [content, setContent] = useState(initialData?.content || "");
+  const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState(initialData?.title || "");
-  const [category, setCategory] = useState(initialData?.category || "");
 
   const handleImageChange = (file: File | null) => {
     setImage(file);
@@ -30,7 +29,7 @@ export default function FormPost({ initialData, mode = "create" }: FormPostProps
           Criar post <Plus />
         </>
       ),
-      fn: (data: Omit<BlogPost, "id" | "date">) => {
+      fn: (data: BlogPostCreate) => {
         console.log("Criar post com os dados", data);
       },
       classBtn: "bg-green-500",
@@ -41,7 +40,7 @@ export default function FormPost({ initialData, mode = "create" }: FormPostProps
           Salvar <Edit />
         </>
       ),
-      fn: (data: Omit<BlogPost, "id" | "date">) => {
+      fn: (data: BlogPostEdit) => {
         console.log("Editar post com os dados", data);
       },
       classBtn: "bg-blue-500",
@@ -53,15 +52,15 @@ export default function FormPost({ initialData, mode = "create" }: FormPostProps
 
     forMode[mode].fn({
       title,
-      category,
-      description,
-      image: "",
+      content,
+      image,
     });
   };
 
   return (
     <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-      <InputImageCustom label="Capa" onChange={handleImageChange} />
+      {mode === "create" && <InputImageCustom label="Capa" onChange={handleImageChange} />}
+
       <InputCustom
         placeholder="Preencha o title"
         label="title"
@@ -70,20 +69,13 @@ export default function FormPost({ initialData, mode = "create" }: FormPostProps
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <InputCustom
-        placeholder="Preencha o category da postagem"
-        label="category"
-        required
-        classNameContainer="bg-secondary/50 border-gray-300"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      />
+
       <Field>
         <FieldLabel className="font-bold">
           Conteúdo
           <span className="text-destructive">*</span>
         </FieldLabel>
-        <Editor onEditorChange={(c) => setDescription(c)} initialValue={description} />
+        <Editor onEditorChange={(c) => setContent(c)} initialValue={content} />
       </Field>
 
       <ButtonCustom className={`w-fit ml-auto ${forMode[mode].classBtn}`} type="submit">

@@ -25,8 +25,6 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.password && formData.password.length < 8) return;
-
     const token = "abcd";
     document.cookie = `token=${token}; path=/; max-age=86400`;
 
@@ -37,14 +35,15 @@ export default function Login() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          <div className="bg-(--primary-dark) rounded-sm p-8 shadow-lg">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">Login Administrador</h1>
+          <div className="bg-secondary rounded-sm p-10 shadow-md border border-gray">
+            <h1 className="text-3xl font-bold text-dark text-center mb-8">Acessar administrador</h1>
 
             <form onSubmit={handleSubmit}>
               <FieldGroup className="space-y-3">
                 <FieldGroup>
                   <InputCustom
                     icon={<Mail />}
+                    classNameContainer="bg-background border-gray"
                     type="email"
                     label="E-mail"
                     id="fieldgroup-email"
@@ -56,6 +55,7 @@ export default function Login() {
 
                   <InputCustom
                     icon={<Lock />}
+                    classNameContainer="bg-background border-gray"
                     type="password"
                     label="Senha"
                     id="fieldgroup-password"

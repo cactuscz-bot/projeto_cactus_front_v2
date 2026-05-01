@@ -18,7 +18,7 @@ export default async function DetalhesPost({ params }: DetalhesPostProps) {
   }
 
   return (
-    <main className="container-menor flex flex-col gap-6 pt-12 pb-50">
+    <main className="container-menor flex flex-col gap-8 pt-12 pb-50">
       <BackButton />
 
       <LeituraPost post={post} />

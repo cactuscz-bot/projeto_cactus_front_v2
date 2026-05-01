@@ -1,9 +1,10 @@
 "use client";
-
 import dynamic from "next/dynamic";
-import { useRef } from "react";
 
-const TEditor = dynamic(() => import("@tinymce/tinymce-react").then((mod) => mod.Editor), { ssr: false });
+const TEditor = dynamic(() => import("@tinymce/tinymce-react").then((m) => m.Editor), {
+  ssr: false,
+  loading: () => <p>Carregando editor...</p>,
+});
 
 interface EditorProps {
   initialValue?: string;
@@ -12,14 +13,12 @@ interface EditorProps {
 }
 
 export default function Editor({ initialValue = "", onEditorChange, style = "" }: EditorProps) {
-  const editorRef = useRef(null);
-
   return (
     <TEditor
-      apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
-      onInit={(evt, editor) => (editorRef.current = editor)}
+      licenseKey="gpl"
+      tinymceScriptSrc="/tinymce/tinymce.min.js"
       initialValue={initialValue}
-      onEditorChange={(newContent) => onEditorChange?.(newContent)}
+      onEditorChange={(newContent: string) => onEditorChange?.(newContent)}
       init={{
         placeholder: "Comece a escrever seu conteúdo aqui...",
         height: 500,
@@ -29,7 +28,6 @@ export default function Editor({ initialValue = "", onEditorChange, style = "" }
           "autolink",
           "lists",
           "link",
-          "image",
           "charmap",
           "preview",
           "anchor",
@@ -38,7 +36,7 @@ export default function Editor({ initialValue = "", onEditorChange, style = "" }
           "fullscreen",
         ],
         toolbar:
-          "undo preview | blocks | bold italic | fontfamily fontsize | alignleft aligncenter alignright | bullist numlist",
+          "undo preview fullscreen | blocks | bold italic | fontfamily fontsize | alignleft aligncenter alignright | bullist numlist",
         content_style: style,
       }}
     />
