@@ -1,9 +1,10 @@
 "use client";
 import dynamic from "next/dynamic";
+import Loading from "../../ui/loading/Loading";
 
 const TEditor = dynamic(() => import("@tinymce/tinymce-react").then((m) => m.Editor), {
   ssr: false,
-  loading: () => <p>Carregando editor...</p>,
+  loading: () => <Loading />,
 });
 
 interface EditorProps {

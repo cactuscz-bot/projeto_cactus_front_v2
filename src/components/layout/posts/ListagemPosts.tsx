@@ -1,48 +1,33 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
 import ButtonCustom from "../../ui/button/Button";
-import Post from "./Post";
-import Posts from "@/src/data/posts.json";
+import Post from "./_components/Post";
 import EmptyCustom from "../../ui/empty/Empty";
+import Loading from "../../ui/loading/Loading";
+import useListagemPosts from "./useListagemPosts";
 
 interface ListagemPostsProps {
   onClickPostEvent?: (id: string) => void;
 }
 
-const ITENS_PER_PAGE = 6;
-
 export default function ListagemPosts({ onClickPostEvent }: ListagemPostsProps) {
-  const [visibleCount, setVisibleCount] = useState(ITENS_PER_PAGE);
+  const { data, isLoading, isSuccess, visiblePosts, hasMore, handleLoadMore } = useListagemPosts();
 
-  const postsSemDescription = useMemo(
-    () =>
-      Posts.map((p) => ({
-        id: p.id,
-        title: p.title,
-        image_url: p.image_url,
-        created_at: p.created_at,
-      })),
-    [],
-  );
+  if (isLoading) {
+    return <Loading message="Carregando postagens..." />;
+  }
 
-  const visiblePosts = useMemo(() => {
-    return postsSemDescription.slice(0, visibleCount);
-  }, [postsSemDescription, visibleCount]);
+  if (!isSuccess) {
+    return <EmptyCustom isError title="Erro ao carregar postagens" size="lg" />;
+  }
 
-  const hasMore = visibleCount < postsSemDescription.length;
-
-  const handleLoadMore = useCallback(() => {
-    setVisibleCount((prev) => prev + ITENS_PER_PAGE);
-  }, [setVisibleCount]);
-
-  if (!postsSemDescription.length) {
+  if (data && !data.length) {
     return <EmptyCustom title="Sem publicações" description="Aguarde o editor publicar postagens" size="lg" />;
   }
 
   return (
     <section>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {visiblePosts.map((post) => (
+        {visiblePosts?.map((post) => (
           <Post post={post} key={post.id} onClickEvent={onClickPostEvent} />
         ))}
       </div>

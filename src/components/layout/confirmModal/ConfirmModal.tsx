@@ -16,7 +16,7 @@ type ConfirmCustomProps = {
   onConfirm: () => void | Promise<void>;
   variant?: "default" | "destructive";
   title?: string;
-  description?: string;
+  description?: string | React.ReactNode;
   confirmText?: string;
 };
 

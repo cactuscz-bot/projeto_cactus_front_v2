@@ -1,35 +1,13 @@
 "use client";
 
 import { Mail, Lock } from "lucide-react";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Field, FieldGroup } from "@/components/ui/field";
 import InputCustom from "@/src/components/ui/input/Input";
 import ButtonCustom from "@/src/components/ui/button/Button";
+import useLogin from "./useLogin";
 
 export default function Login() {
-  const router = useRouter();
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const token = "abcd";
-    document.cookie = `token=${token}; path=/; max-age=86400`;
-
-    router.replace("/admin");
-  };
+  const { formData, handleChange, handleSubmit, loginMutation } = useLogin();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -38,7 +16,12 @@ export default function Login() {
           <div className="bg-secondary rounded-sm p-10 shadow-md border border-gray">
             <h1 className="text-3xl font-bold text-dark text-center mb-8">Acessar administrador</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
               <FieldGroup className="space-y-3">
                 <FieldGroup>
                   <InputCustom
@@ -67,8 +50,14 @@ export default function Login() {
                 </FieldGroup>
 
                 <Field orientation="horizontal">
-                  <ButtonCustom size="lg" type="submit" title="Fazer login" className="hover:opacity-80">
-                    ENTRAR
+                  <ButtonCustom
+                    size="lg"
+                    type="submit"
+                    title="Fazer login"
+                    className="hover:opacity-90"
+                    loading={loginMutation.isPending}
+                  >
+                    {loginMutation.isPending ? "Entrando" : "Entrar"}
                   </ButtonCustom>
                 </Field>
               </FieldGroup>

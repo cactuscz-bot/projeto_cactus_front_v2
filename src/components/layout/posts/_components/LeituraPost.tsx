@@ -1,6 +1,7 @@
 import { BlogPost } from "@/src/types/post.types";
 import DOMPurify from "isomorphic-dompurify";
 import "./leituraPost.css";
+import { formatarData } from "@/src/utils/formatarData";
 
 interface LeituraPostProps {
   post: BlogPost;
@@ -8,12 +9,12 @@ interface LeituraPostProps {
 
 export default function LeituraPost({ post }: LeituraPostProps) {
   return (
-    <section>
-      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+    <section className="flex flex-col gap-8">
+      <h1 className="text-3xl font-bold">{post.title}</h1>
 
-      <img src={post.image_url} alt={post.title} className="w-150 mx-auto max-h-100 object-cover rounded-lg my-8" />
-
-      <p className="text-sm text-(--gray) mb-2">{post.created_at}</p>
+      {post.image_url && (
+        <img src={post.image_url} alt={post.title} className="w-150 mx-auto max-h-100 object-cover rounded-lg" />
+      )}
 
       <div
         className="editor-content prose text-gray-700"
@@ -21,6 +22,8 @@ export default function LeituraPost({ post }: LeituraPostProps) {
           __html: DOMPurify.sanitize(post.content),
         }}
       />
+
+      <p className="text-sm text-(--gray)">{formatarData(post.created_at)}</p>
     </section>
   );
 }

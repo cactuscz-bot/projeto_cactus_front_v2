@@ -13,7 +13,7 @@ export default function Home() {
     <main className="font-[ErasBold,Arial]">
       <section className="apresentacao" id="apresentacao">
         <div className="flex justify-center">
-          <Image src={CactusApresentacao} alt="Apresentação Cactus" className="cactus-apresentacao" />
+          <Image src={CactusApresentacao} alt="Apresentação Cactus" className="cactus-apresentacao" priority />
         </div>
         <h2>Construindo com a terra, crescendo com a comunidade</h2>
         <h3>

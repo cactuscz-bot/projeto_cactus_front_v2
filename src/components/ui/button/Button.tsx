@@ -3,6 +3,7 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes } from "react";
+import Loading from "../loading/Loading";
 
 interface ButtonCustomProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "size"> {
   loading?: boolean;
@@ -14,7 +15,7 @@ interface ButtonCustomProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>
 
 export default function ButtonCustom({
   loading = false,
-  componentLoading = <>Carregando...</>,
+  componentLoading = <Loading withMessage={false} size="sm" />,
   fullWidth = true,
   children,
   className = "",
@@ -35,7 +36,7 @@ export default function ButtonCustom({
       type={type}
       className={`
         ${fullWidth ? "w-full" : ""}
-        flex items-center border-0 justify-center rounded-lg font-bold
+        flex items-center border-0 justify-center gap-2 rounded-lg font-bold
         transition-all shadow-md hover:shadow-lg
         disabled:opacity-50 disabled:cursor-not-allowed
         ${sizeClasses[size]}
@@ -45,7 +46,14 @@ export default function ButtonCustom({
       variant={variant}
       {...props}
     >
-      {loading ? componentLoading : children}
+      {loading ? (
+        <>
+          {children}
+          {componentLoading}
+        </>
+      ) : (
+        children
+      )}
     </Button>
   );
 }

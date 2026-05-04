@@ -2,16 +2,29 @@
 
 import ButtonCustom from "@/src/components/ui/button/Button";
 import { ChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface BackButtonProps {
   title?: string;
-  onClick?: () => void;
+  previewNavigationBack?: () => void;
+  fallbackUrl: string;
 }
 
-export default function BackButton({ title = "Voltar para a pagina anterior", onClick }: BackButtonProps) {
+export default function BackButton({
+  title = "Voltar para a pagina anterior",
+  previewNavigationBack,
+  fallbackUrl,
+}: BackButtonProps) {
+  const router = useRouter();
+
   const handleClick = () => {
-    onClick?.();
-    window.history.back();
+    previewNavigationBack?.();
+
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      router.push(fallbackUrl);
+    }
   };
 
   return (
