@@ -9,7 +9,7 @@ export default function Admin() {
 
   return (
     <main className="flex-1 pt-12 pb-18">
-      <div className="container-principal flex flex-col gap-8">
+      <div className="container-principal flex flex-col gap-10">
         <ButtonCustom
           className="w-fit ml-auto bg-primary hover:bg-primary/80 transition-colors duration-300"
           onClick={() => router.push("/admin/post/new")}

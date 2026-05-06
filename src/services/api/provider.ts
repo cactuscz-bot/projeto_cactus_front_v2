@@ -1,21 +1,43 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse, HttpStatusCode } from "axios";
 import { authConstants } from "@/src/constants/auth.constants";
+import { getCookie, deleteCookie } from "cookies-next/client";
 
 export const provider = axios.create({
   baseURL: authConstants.BASE_URL,
 });
 
-// provider.interceptors.response.use(
-//   (response: AxiosResponse) => response,
-//   async (error: AxiosError) => {
-//     if (error.status === HttpStatusCode.Unauthorized) {
-//       if (typeof window !== "undefined") {
-//         document.cookie = `${authConstants.NAME_TOKEN_IN_STORAGE}=; Path=/; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
+export const providerPubic = axios.create({
+  baseURL: authConstants.BASE_URL,
+});
 
-//         window.location.replace("/login");
-//       }
-//     }
+provider.interceptors.request.use((config) => {
+  const token = getCookie(authConstants.NAME_TOKEN_IN_STORAGE)?.toString();
 
-//     return Promise.reject(error);
-//   },
-// );
+  if (!token) {
+    deleteCookie(authConstants.NAME_TOKEN_IN_STORAGE);
+
+    if (typeof window !== "undefined") {
+      window.location.replace("/login");
+    }
+
+    return Promise.reject(new Error("Chave de acesso não encontrada. Redirecionando para a página de login."));
+  }
+
+  config.headers.Authorization = `Bearer ${token}`;
+
+  return config;
+});
+
+provider.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    if (error.status === HttpStatusCode.Unauthorized) {
+      if (typeof window !== "undefined") {
+        deleteCookie(authConstants.NAME_TOKEN_IN_STORAGE);
+
+        window.location.replace("/login");
+      }
+    }
+    return Promise.reject(error);
+  },
+);

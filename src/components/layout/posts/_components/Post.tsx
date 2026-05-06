@@ -1,7 +1,7 @@
 "use client";
 import { BlogPost } from "@/src/types/post.types";
 import { formatarData } from "@/src/utils/formatarData";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import FallBackImage from "@/public/img/fallback-image-post.png";
 
 interface PostProps {
@@ -10,6 +10,7 @@ interface PostProps {
 }
 
 export default function Post({ post, onClickEvent }: PostProps) {
+  const [loadingImage, setLoadingImage] = useState(true);
   const postDate = useMemo(() => formatarData(post.created_at), [post.created_at]);
 
   return (
@@ -19,8 +20,13 @@ export default function Post({ post, onClickEvent }: PostProps) {
       title={post.title}
       onClick={() => (onClickEvent ? onClickEvent(post.id) : {})}
     >
-      <div className="w-full h-48 overflow-hidden border-b border-border">
-        <img src={post.image_url || FallBackImage.src} alt={post.title} className="w-full h-full object-cover" />
+      <div className={`w-full h-48 overflow-hidden border-b border-border`}>
+        <img
+          src={loadingImage ? FallBackImage.src : post.image_url || FallBackImage.src}
+          alt={post.title}
+          className="w-full h-full object-cover"
+          onLoad={() => setLoadingImage(false)}
+        />
       </div>
 
       <div className="p-4">

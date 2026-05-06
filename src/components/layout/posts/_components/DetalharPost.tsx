@@ -1,6 +1,6 @@
 "use client";
 
-import ExcluirPost from "@/src/components/layout/posts/_components/excluirPost";
+import ExcluirPost from "@/src/components/layout/posts/_components/ExcluirPost";
 import BackButton from "@/src/components/layout/backButton/BackButton";
 import LeituraPost from "@/src/components/layout/posts/_components/LeituraPost";
 import EmptyCustom from "@/src/components/ui/empty/Empty";
@@ -20,14 +20,14 @@ export default function DetalharPostCustom({ id, isAdmin = false }: DetalhesPost
     isLoading,
     isSuccess,
   } = useQuery({
-    queryKey: ["postagem", id],
+    queryKey: ["postagens", id],
     queryFn: async () => {
       return PostRequests.getById(id);
     },
   });
 
   return (
-    <main className="container-menor flex flex-col gap-8 pt-12 pb-50">
+    <main className="container-menor flex flex-col gap-15 pt-12 pb-50">
       <div className="flex justify-between">
         <BackButton fallbackUrl={isAdmin ? "/admin" : "/blog"} />
 

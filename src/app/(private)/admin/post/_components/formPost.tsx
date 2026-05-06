@@ -13,7 +13,11 @@ export interface FormPostProps {
 }
 
 export default function FormPost({ initialData, mode = "create" }: FormPostProps) {
-  const { handleSubmit, handleImageChange, setTitle, title, setContent, forMode } = useFormPost({ initialData, mode });
+  const { handleSubmit, handleImageChange, setTitle, title, setContent, forMode, editMutation, createMutation } =
+    useFormPost({
+      initialData,
+      mode,
+    });
 
   return (
     <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -26,6 +30,7 @@ export default function FormPost({ initialData, mode = "create" }: FormPostProps
         classNameContainer="bg-secondary/50 border-gray-300"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        maxLength={255}
       />
 
       <Field>
@@ -36,7 +41,11 @@ export default function FormPost({ initialData, mode = "create" }: FormPostProps
         <Editor onEditorChange={(c) => setContent(c)} initialValue={mode === "edit" ? initialData?.content : ""} />
       </Field>
 
-      <ButtonCustom className={`w-fit ml-auto ${forMode[mode].classBtn}`} type="submit">
+      <ButtonCustom
+        className={`w-fit ml-auto ${forMode[mode].classBtn}`}
+        type="submit"
+        loading={editMutation.isPending || createMutation.isPending}
+      >
         {forMode[mode].titleBtn}
       </ButtonCustom>
     </form>

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "sonner";
+import { setCookie } from "cookies-next/client";
 
 export default function useLogin() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function useLogin() {
     const now = Math.floor(Date.now() / 1000);
     const maxAge = decoded.exp - now;
 
-    document.cookie = `token=${token}; path=/; max-age=${maxAge}`;
+    setCookie("token", token, { path: "/", maxAge });
   };
 
   const loginMutation = useMutation({

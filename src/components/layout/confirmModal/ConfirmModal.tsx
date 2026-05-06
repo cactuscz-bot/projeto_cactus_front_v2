@@ -9,6 +9,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
+import Loading from "../../ui/loading/Loading";
 
 type ConfirmCustomProps = {
   open: boolean;
@@ -18,6 +19,7 @@ type ConfirmCustomProps = {
   title?: string;
   description?: string | React.ReactNode;
   confirmText?: string;
+  loading?: boolean;
 };
 
 export function ConfirmCustom({
@@ -28,12 +30,8 @@ export function ConfirmCustom({
   title = "Tem certeza?",
   description = "Essa ação não pode ser desfeita.",
   confirmText = "Confirmar",
+  loading = false,
 }: ConfirmCustomProps) {
-  const handleConfirm = async () => {
-    await onConfirm();
-    onOpenChange(false);
-  };
-
   const variants = {
     default: {
       title: "text-(--dark)",
@@ -56,8 +54,8 @@ export function ConfirmCustom({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
 
-          <AlertDialogAction onClick={handleConfirm} className={variants[variant].action}>
-            {confirmText}
+          <AlertDialogAction onClick={onConfirm} className={variants[variant].action}>
+            {loading ? <Loading size="sm" withMessage={false} /> : confirmText}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

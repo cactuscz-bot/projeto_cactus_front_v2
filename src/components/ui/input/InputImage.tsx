@@ -3,6 +3,7 @@
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Image as ImageIcon } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface InputImageCustomProps {
   label?: React.ReactNode;
@@ -12,7 +13,10 @@ interface InputImageCustomProps {
   onChange?: (file: File | null) => void;
   id?: string;
   accept?: string;
+  maxSize?: number;
 }
+
+const MAX_SIZE = 4 * 1024 * 1024;
 
 export default function InputImageCustom({
   label,
@@ -22,12 +26,20 @@ export default function InputImageCustom({
   onChange,
   id = "upload-image",
   accept = "image/*",
+  maxSize = MAX_SIZE,
 }: InputImageCustomProps) {
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleFile = (file: File | null) => {
     if (!file) {
       onChange?.(null);
+      return;
+    }
+
+    if (file.size > maxSize) {
+      toast.error(
+        `O arquivo selecionado é muito grande. O tamanho máximo permitido é de ${maxSize / (1024 * 1024)}MB.`,
+      );
       return;
     }
 
@@ -56,14 +68,14 @@ export default function InputImageCustom({
           onChange={(e) => handleFile(e.target.files?.[0] || null)}
         />
 
-        <label htmlFor={id} className={`block cursor-pointer py-12`}>
+        <label htmlFor={id} className={`block cursor-pointer py-10`}>
           {!preview ? (
             <div className={`w-fit mx-auto flex flex-col items-center text-gray-400`}>
               <ImageIcon size={50} />
               <p>{description}</p>
             </div>
           ) : (
-            <img src={preview} alt="preview" className={`max-h-64 mx-auto rounded-lg object-contain`} />
+            <img src={preview} alt="preview" className={`max-h-68 mx-auto rounded-lg object-contain`} />
           )}
         </label>
       </div>

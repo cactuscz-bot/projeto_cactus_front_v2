@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ConfirmCustom } from "../../../confirmModal/ConfirmModal";
+import { deleteCookie } from "cookies-next/client";
 
 export default function MenuAdmin() {
   const router = useRouter();
@@ -21,7 +22,9 @@ export default function MenuAdmin() {
   };
 
   const handleLogout = () => {
-    document.cookie = "token=; Max-Age=0; path=/";
+    deleteCookie("token");
+    handleChangeConfirmLogout(false);
+
     router.replace("/");
   };
 
