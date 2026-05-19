@@ -5,12 +5,12 @@
     "categoria": "Bioconstrução",
     "descricao": "Ambiente pedagógico de experimentação prática de técnicas construtivas de baixo impacto ambiental e prestação de serviços de assistência técnica para habitação de interesse social rural e urbana à famílias com renda de até três salários mínimos.",
     "imgs": [
-      "img/projetos/modeloATHIS4.png",
-      "img/projetos/modeloATHIS1.png",
-      "img/projetos/modeloATHIS2.png",
-      "img/projetos/modeloATHIS3.png"
+      "/img/projetos/modeloATHIS4.png",
+      "/img/projetos/modeloATHIS1.png",
+      "/img/projetos/modeloATHIS2.png",
+      "/img/projetos/modeloATHIS3.png"
     ],
-    "capa": "img/projetos/modeloATHIS4.png"
+    "capa": "/img/projetos/modeloATHIS4.png"
   },
   {
     "id": 2,
@@ -18,7 +18,7 @@
     "categoria": "Agroecologia",
     "descricao": "Famílias da cidade que se tornam co-agricultores dando apoio à produção agroecológica de agricultores familiares de Cajazeiras que semanalmente trazem uma cesta de produtos de época livres de agrotóxicos para as famílias que deram suporte a sua produção.",
     "imgs": ["img/projetos/CSA1.png", "img/projetos/CSA2.png", "img/projetos/CSA3.png", "img/projetos/CSA4.png"],
-    "capa": "img/projetos/CSA4.png"
+    "capa": "/img/projetos/CSA4.png"
   },
   {
     "id": 3,
@@ -26,11 +26,11 @@
     "categoria": "Economia comunitária",
     "descricao": "Comunidade de recicladores de plásticos que faz parte da comunidade global Precious Plastic que dá autonomia aos cidadãos produzirem produtos feitos dos plásticos reciclados através de pequenas máquinas de trituração e modelagem que podem ser montadas pela própria comunidade.",
     "imgs": [
-      "img/projetos/plastico1.png",
-      "img/projetos/plastico2.png",
-      "img/projetos/plastico3.png",
-      "img/projetos/plastico4.png"
+      "/img/projetos/plastico1.png",
+      "/img/projetos/plastico2.png",
+      "/img/projetos/plastico3.png",
+      "/img/projetos/plastico4.png"
     ],
-    "capa": "img/projetos/plastico2.png"
+    "capa": "/img/projetos/plastico2.png"
   }
 ]
