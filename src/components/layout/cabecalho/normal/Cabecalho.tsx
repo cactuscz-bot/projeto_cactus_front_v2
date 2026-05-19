@@ -4,15 +4,24 @@ import "./cabecalho.css";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import CactusLogo from "@/public/img/CactusLogo.png";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 export default function Cabecalho() {
   const pathName = usePathname();
   const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const paletaCoresConformePath =
     pathName === "/"
-      ? { headerClass: "header-primary", colorItemDestaque: "text-(--color-secondary)" }
-      : { headerClass: "header-secondary", colorItemDestaque: "text-(--color-primary)" };
+      ? {
+          headerClass: "header-primary",
+          colorItemDestaque: "text-(--color-secondary) bg-(--ring)",
+        }
+      : {
+          headerClass: "header-secondary",
+          colorItemDestaque: "text-(--color-primary) bg-(--border)",
+        };
 
   const destacarItem = (path: string) => {
     if (path === pathName) return paletaCoresConformePath.colorItemDestaque;
@@ -22,11 +31,19 @@ export default function Cabecalho() {
 
   return (
     <header className={`${paletaCoresConformePath.headerClass} transition-colors`}>
-      <div className="container-principal nav-bar">
-        <Link href="/" className="logo">
-          <Image src={CactusLogo} alt="Logo Cactus" className="logo-img" priority />
-        </Link>
-        <nav>
+      <div className="container-principal container-header">
+        <div className="menu-itens-left">
+          <Link href="/" className="logo">
+            <Image src={CactusLogo} alt="Logo Cactus" className="logo-img" priority />
+          </Link>
+          {menuOpen ? (
+            <X className="close-icon" onClick={() => setMenuOpen(false)} />
+          ) : (
+            <Menu className="hamburguer-icon" onClick={() => setMenuOpen(true)} />
+          )}
+        </div>
+
+        <nav className={`nav-bar ${menuOpen ? "nav-open" : ""}`}>
           <ul className="lista-nav">
             <li onClick={() => router.push("/")} className={`nav-item ${destacarItem("/")}`} title="Pagina inicial">
               <span className="nav-text">Home</span>
