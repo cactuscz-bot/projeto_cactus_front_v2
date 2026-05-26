@@ -13,7 +13,7 @@ export default function Login() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          <div className="bg-secondary rounded-sm p-10 shadow-md border border-gray">
+          <div className="bg-transparent md:bg-secondary rounded-sm p-8 md:p-10 shadow-0 md:shadow-md border border-gray">
             <h1 className="text-3xl font-bold text-dark text-center mb-8">Acessar administrador</h1>
 
             <form

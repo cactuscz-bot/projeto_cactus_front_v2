@@ -27,7 +27,7 @@ export default function DetalharPostCustom({ id, isAdmin = false }: DetalhesPost
   });
 
   return (
-    <main className="container-menor flex flex-col gap-15 pt-12 pb-50">
+    <main className="container-menor flex flex-col gap-5 md:gap-15 pt-8 md:pt-12 pb-50 px-5 md:px-0">
       <div className="flex justify-between">
         <BackButton fallbackUrl={isAdmin ? "/admin" : "/blog"} />
 

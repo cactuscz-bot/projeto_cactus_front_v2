@@ -144,3 +144,23 @@
     font-size: 18px;
   }
 }
+
+@media (max-width: 768px) {
+  .projetos h3 {
+    font-size: 1.5rem;
+  }
+
+  .projetosCards p {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+
+  .modal-content {
+    max-width: 400px;
+  }
+
+  .modal-img {
+    min-height: 150px;
+    max-height: 250px;
+  }
+}

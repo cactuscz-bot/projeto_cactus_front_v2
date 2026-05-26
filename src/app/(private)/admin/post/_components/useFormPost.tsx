@@ -70,6 +70,8 @@ export default function useFormPost({ mode = "create", initialData }: FormPostPr
       return;
     }
 
+    if (data.title === initialData!.title && data.content === initialData!.content) return;
+
     editMutation.mutate({ id: initialData!.id, data });
   };
 

@@ -7,10 +7,11 @@ import ArvoresIcon from "@/public/img/arvoresIcon.png";
 import InfraIcon from "@/public/img/infraIcon.png";
 import InovacaoIcon from "@/public/img/inovacaoIcon.png";
 import EstudanteIcon from "@/public/img/estudanteIcon.png";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
-    <main className="font-[ErasBold,Arial]">
+    <main className="section-home">
       <section className="apresentacao" id="apresentacao">
         <div className="flex justify-center">
           <Image src={CactusApresentacao} alt="Apresentação Cactus" className="cactus-apresentacao" priority />
@@ -21,6 +22,8 @@ export default function Home() {
           <span className="destaque">assistência técnica</span>, em bioconstrução, agroecologia e economia solidária.
         </h3>
       </section>
+
+      <Separator />
 
       <section className="conteudoInit" id="conteudoInit">
         <h3> O que fazemos? </h3>
