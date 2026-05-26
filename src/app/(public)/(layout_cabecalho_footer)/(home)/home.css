@@ -1,4 +1,7 @@
-/* --- APRESENTAÇÃO --- */
+.section-home {
+  font-family: "ErasBold", Arial;
+}
+
 .apresentacao {
   display: flex;
   flex-direction: column;
@@ -176,5 +179,21 @@
   }
   .objetivos-itens {
     border-bottom: 1px solid var(--border);
+  }
+
+  .apresentacao {
+    padding: 50px 1rem;
+  }
+
+  .apresentacao h2,
+  .conteudoInit h3,
+  .objetivos h3,
+  .contato h3 {
+    font-size: 1.5rem;
+  }
+
+  .apresentacao h3,
+  .conteudoInit p {
+    font-size: 1rem;
   }
 }

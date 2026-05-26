@@ -6,8 +6,8 @@ import MenuAdmin from "./components/MenuAdmin";
 
 export default function CabecalhoAdmin() {
   return (
-    <header className={`header-secondary`}>
-      <div className="container-principal nav-bar">
+    <header className="header-secondary">
+      <div className="container-principal flex justify-between">
         <Link href="/admin" className="logo">
           <Image src={CactusLogo} alt="Logo Cactus" className="logo-img" priority />
         </Link>

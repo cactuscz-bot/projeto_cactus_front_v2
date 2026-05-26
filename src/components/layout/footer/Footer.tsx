@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="footer-bg">
       <div className="container-principal footer container">
-        <div className="flex justify-between flex-wrap gap-2">
+        <div className="flex justify-between flex-col md:flex-row flex-wrap gap-4 md:gap-2">
           <div className="footer-informacoes">
             <h3>Equipe</h3>
             <nav>
@@ -78,7 +78,9 @@ export default function Footer() {
           </div>
 
           <div className="footer-informacoes">
-            <h3>Endereço</h3>
+            <Link href={"https://maps.app.goo.gl/Lo3skv7hkBCCg8i79"} target="_blank">
+              <h3>Endereço</h3>
+            </Link>
             <ul>
               <li>Rua José Dantas Nobres</li>
               <li>Bairro Jardim Oásis</li>

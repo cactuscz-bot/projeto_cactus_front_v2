@@ -6,6 +6,7 @@ import Image from "next/image";
 import CactusLogo from "@/public/img/CactusLogo.png";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Separator } from "@/components/ui/separator";
 
 export default function Cabecalho() {
   const pathName = usePathname();
@@ -42,6 +43,8 @@ export default function Cabecalho() {
             <Menu className="hamburguer-icon" onClick={() => setMenuOpen(true)} />
           )}
         </div>
+
+        {menuOpen && <Separator />}
 
         <nav className={`nav-bar ${menuOpen ? "nav-open" : ""}`}>
           <ul className="lista-nav">
