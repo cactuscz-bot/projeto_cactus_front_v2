@@ -61,13 +61,6 @@ export default function Cabecalho() {
             >
               <span className="nav-text">Blog</span>
             </li>
-            <li
-              onClick={() => router.push("/dashboard")}
-              className={`nav-item ${destacarItem("/dashboard")}`}
-              title="Dashboard informativo"
-            >
-              <span className="nav-text">Dashboard</span>
-            </li>
           </ul>
         </nav>
       </div>
