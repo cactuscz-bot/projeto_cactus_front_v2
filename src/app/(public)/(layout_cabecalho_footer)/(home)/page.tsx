@@ -1,4 +1,4 @@
-import FormContato from "./_components/form_contato/_formContato";
+import FormContato from "./_components/form_contato/formContato";
 import Projetos from "./_components/projetos/_projetos";
 import "./home.css";
 import Image from "next/image";
