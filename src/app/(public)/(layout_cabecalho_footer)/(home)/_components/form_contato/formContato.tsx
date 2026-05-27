@@ -1,22 +1,10 @@
 "use client";
+import ButtonCustom from "@/src/components/ui/button/Button";
 import "./formContato.css";
+import useFormContato from "./useFormContato";
 
 export default function FormContato() {
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-
-    const nome = formData.get("nome") as string;
-    const email = formData.get("email") as string;
-    const mensagem = formData.get("mensagem") as string;
-
-    const mailto = `mailto:cactus.cz@ifpb.edu.br
-    ?subject=${encodeURIComponent(`Contato de ${nome}`)}
-    &body=${encodeURIComponent(`Nome: ${nome}\nEmail: ${email}\nMensagem: ${mensagem}`)}`;
-
-    window.open(mailto, "_blank");
-  };
+  const { handleSubmit, sendContactMutation } = useFormContato();
 
   return (
     <form onSubmit={handleSubmit} id="form-contato" className="form-contato">
@@ -36,9 +24,14 @@ export default function FormContato() {
       </div>
 
       <div className="container-btn">
-        <button type="submit" className="btn-enviar">
+        <ButtonCustom
+          type="submit"
+          className="btn-enviar w-full md:w-fit mx-auto"
+          size="lg"
+          loading={sendContactMutation.isPending}
+        >
           Enviar Mensagem
-        </button>
+        </ButtonCustom>
       </div>
     </form>
   );
