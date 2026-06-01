@@ -37,7 +37,7 @@ export default function Editor({ initialValue = "", onEditorChange, style = "" }
           "fullscreen",
         ],
         toolbar:
-          "undo preview fullscreen | blocks | bold italic | fontfamily fontsize | alignleft aligncenter alignright | bullist numlist",
+          "undo preview fullscreen | blocks | bold italic fontsize | alignleft aligncenter alignright | bullist numlist",
         content_style: style,
       }}
     />

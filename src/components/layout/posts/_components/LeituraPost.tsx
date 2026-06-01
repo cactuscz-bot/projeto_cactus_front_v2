@@ -2,6 +2,7 @@ import { BlogPost } from "@/src/types/post.types";
 import DOMPurify from "isomorphic-dompurify";
 import "./leituraPost.css";
 import { formatarData } from "@/src/utils/formatarData";
+import { Separator } from "@/components/ui/separator";
 
 interface LeituraPostProps {
   post: BlogPost;
@@ -22,6 +23,8 @@ export default function LeituraPost({ post }: LeituraPostProps) {
           __html: DOMPurify.sanitize(post.content),
         }}
       />
+
+      <Separator />
 
       <p className="text-sm text-(--gray)">{formatarData(post.created_at)}</p>
     </section>
