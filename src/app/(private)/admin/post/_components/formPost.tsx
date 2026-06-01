@@ -38,7 +38,15 @@ export default function FormPost({ initialData, mode = "create" }: FormPostProps
           Conteúdo
           <span className="text-destructive">*</span>
         </FieldLabel>
-        <Editor onEditorChange={(c) => setContent(c)} initialValue={mode === "edit" ? initialData?.content : ""} />
+        <Editor
+          onEditorChange={(c) => setContent(c)}
+          initialValue={mode === "edit" ? initialData?.content : ""}
+          style={`
+          body {
+            font-family: Arial, sans-serif;
+          }
+          `}
+        />
       </Field>
 
       <ButtonCustom
