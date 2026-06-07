@@ -13,8 +13,8 @@ export default function useLogin() {
   const router = useRouter();
 
   const [formData, setFormData] = useState<LoginRequest>({
-    email: "admin@cactus.com",
-    password: "cactusadminblog123",
+    email: "",
+    password: "",
   });
 
   const handleChange = (field: string, value: string) => {
