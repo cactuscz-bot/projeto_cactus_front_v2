@@ -1,0 +1,12 @@
+packages:
+  - '.'
+
+allowBuilds:
+  msw: true
+  sharp: false
+  unrs-resolver: false
+
+onlyBuiltDependenciesList:
+  - "sharp"
+  - "msw"
+  - "unrs-resolver"
