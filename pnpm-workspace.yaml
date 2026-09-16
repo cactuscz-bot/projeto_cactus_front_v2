@@ -1,4 +1,3 @@
 allowBuilds:
   msw: true
-
-allowedBuildScripts: ['unrs-resolver']
+  unrs-resolver: true
